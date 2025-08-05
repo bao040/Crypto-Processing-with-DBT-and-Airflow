@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+*.tgz
+*.egg-info
+.git/
+.venv/
+.env
+dbt_packages/
+logs/
+target/

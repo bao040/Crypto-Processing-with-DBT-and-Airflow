@@ -102,6 +102,12 @@ services:
     command: webserver
     ports:
       - 8080:8080
+    volumes:
+      - ./crypto_pipeline_project:/opt/airflow/crypto_pipeline_project
+      - ./crypto_pipeline_project/profiles:/home/airflow/.dbt
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health"]
       interval: 10s
@@ -116,6 +122,12 @@ services:
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
+    volumes:
+      - ./crypto_pipeline_project:/opt/airflow/crypto_pipeline_project
+      - ./crypto_pipeline_project/profiles:/home/airflow/.dbt
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
     healthcheck:
       test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
       interval: 10s
@@ -130,6 +142,12 @@ services:
   airflow-worker:
     <<: *airflow-common
     command: celery worker
+    volumes:
+      - ./crypto_pipeline_project:/opt/airflow/crypto_pipeline_project
+      - ./crypto_pipeline_project/profiles:/home/airflow/.dbt
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
     healthcheck:
       test:
         - "CMD-SHELL"

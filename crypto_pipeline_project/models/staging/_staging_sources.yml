@@ -1,0 +1,16 @@
+version: 2
+
+sources:
+  - name: raw
+    database: CRYPTO_DB
+    schema: RAW
+    tables:
+      - name: coins_list
+        description: "List of coins from CoinGecko API"
+
+      - name: coins_markets
+        description: "Market information of coins"
+
+      - name: global_market
+        description: "Overall crypto market"
+

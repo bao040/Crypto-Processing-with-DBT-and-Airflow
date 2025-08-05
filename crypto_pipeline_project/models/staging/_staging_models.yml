@@ -1,0 +1,93 @@
+version: 2
+
+models:
+  - name: stg_coins_list
+    description: "Normalize coins_list"
+    columns:
+      - name: id
+        description: "Unique coin ID"
+        tests:
+          - not_null
+
+      - name: symbol
+        tests:
+          - not_null
+
+      - name: name
+        tests:
+          - not_null
+    
+  - name: stg_coins_markets
+    description: "Normalize coins_markets table"
+    columns:
+      - name: id
+        description: "Unique coin ID"
+        tests:
+          - not_null
+
+      - name: symbol
+        tests:
+          - not_null
+
+      - name: name
+        tests:
+          - not_null
+
+      - name: current_price
+        description: "Current price in USD"
+        tests:
+          - not_null
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: market_cap
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: total_volume
+        description: "Trading volume in 24h (USD)"
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: circulating_supply
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: timestamp
+        description: "Time of fetching data"
+        tests:
+          - not_null
+
+
+  - name: stg_global_market
+    description: "Normalize global_market table"
+    columns:
+      - name: timestamp
+        description: "Time of fetching data"
+        tests:
+          - not_null
+          - unique
+
+      - name: total_market_cap_usd
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: total_volume_24h_usd
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: active_cryptocurrencies
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 0
+
+      - name: market_cap_percentage
+        description: "Percentage of coins in the market (string dict)"
+        tests: []
+
+

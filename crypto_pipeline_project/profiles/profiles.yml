@@ -1,0 +1,27 @@
+# test_profile:
+#   target: dev
+#   outputs:
+#     dev:
+#       type: postgres
+#       host: postgres-sakila
+#       user: postgres
+#       password: postgres
+#       port: 5433
+#       dbname: postgres
+#       schema: public
+#       threads: 1
+
+test_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      threads: 4
+      account: JWPQMZE-WT21793
+      user: BAOTGHE180658
+      password: Baodepzai2004@
+      role: ACCOUNTADMIN
+      database: CRYPTO_DB
+      warehouse: COMPUTE_WH
+      schema: PUBLIC
+      insecure_mode: true

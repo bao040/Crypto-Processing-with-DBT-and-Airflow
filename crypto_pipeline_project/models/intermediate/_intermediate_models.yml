@@ -1,0 +1,43 @@
+version: 2
+
+models:
+  - name: int_dim_time
+    description: "Time dimension view derived from stg_coins_markets"
+    columns:
+      - name: time_id
+        description: "Unique identifier for each time snapshot"
+        tests:
+          - not_null
+          - unique
+
+  - name: int_fact_market_metrics
+    description: "Enriched fact table with market metrics and trend calculations"
+    columns:
+      - name: coin_id
+        tests:
+          - not_null
+      - name: current_price
+        tests:
+          - not_null
+          - no_negative_prices
+          
+      - name: current_price_7d_avg
+        description: "7-day moving average of current_price"
+      - name: time_id
+        tests:
+          - not_null
+      - name: total_volume
+        tests:
+          - no_negative_prices
+      
+      - name: market_cap_category
+        description: "Market cap classification: Large Cap, Mid Cap, Small Cap"
+
+  
+
+
+
+
+
+
+
